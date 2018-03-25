@@ -2,7 +2,7 @@ package ch.hugdata.island.svgwriter
 
 import ch.hugdata.island.graph.{Point2D, Polygon2D}
 
-import scala.util.{Success, Try}
+import scala.util.{Failure, Success, Try}
 
 /**
   * Type for SVG-polygons
@@ -16,5 +16,11 @@ case class Polygon(private val polygon: Polygon2D,
     s"""<polygon points="${points.map(serialize).mkString(" ")}" ${properties.map(_.toSvg).mkString(" ")} />"""
   }
 
-  override def toSVG()(implicit limits: Dimensions): Try[String] = Success(renderSvg(polygon.points))
+  override def toSVG()(implicit limits: Dimensions): Try[String] = {
+    if (polygon.points.forall(point => limits.withinLimits(point.xLocation, point.yLocation))) {
+      Success(renderSvg(polygon.points))
+    } else {
+      Failure(new Exception("At least part of the polygon is out of limits."))
+    }
+  }
 }

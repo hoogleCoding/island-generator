@@ -11,10 +11,11 @@ import scala.collection.JavaConverters._
 /**
   * Type for the creation of voronoi diagrams
   */
-case class VoronoiDiagram(polygons: Seq[Polygon2D])
+case class VoronoiGraph(sites: Seq[Point2D],
+                        polygons: Seq[Polygon2D])
 
-object VoronoiDiagram {
-  def calculateVoronoi(points: Seq[Point2D], limits: Dimensions): VoronoiDiagram = {
+object VoronoiGraph {
+  def calculateVoronoi(points: Seq[Point2D], limits: Dimensions): VoronoiGraph = {
     val rootPolygon = initializeRootPolygon(limits)
     val sites = convertPoints(points)
     val diagram = new PowerDiagram
@@ -24,7 +25,7 @@ object VoronoiDiagram {
     val polygons: Seq[Polygon2D] = sites.asScala
       .map(site => Polygon2D.fromPolygonSimple(site.getPolygon))
       .toSeq
-    VoronoiDiagram(polygons)
+    VoronoiGraph(points, polygons)
   }
 
   private def initializeRootPolygon(limits: Dimensions): PolygonSimple = {
@@ -40,7 +41,7 @@ object VoronoiDiagram {
 
   private def convertPoints(points: Seq[Point2D]): OpenList = {
     val sites: OpenList = new OpenList
-    points.map(point => new Site(point.xLocation, point.yLocation))
+    points.map(point => new kn.uni.voronoitreemap.j2d.Site(point.xLocation, point.yLocation))
       .foreach(sites.add)
     sites
   }

@@ -24,9 +24,11 @@ class SvgWriter()(implicit private val dimensions: Dimensions) {
        |""".stripMargin
 
   def writeToFile(filename: String,
-                  data: String): Unit = {
+                  data: String,
+                  title: Option[String] = None,
+                  description: Option[String] = None): Unit = {
     val writer = new PrintWriter(new File(filename))
-    val svg = renderSvg(Some("Test"), None, Some(data))
+    val svg = renderSvg(title, description, Some(data))
     writer.write(svg)
     writer.flush()
     writer.close()

@@ -3,11 +3,33 @@ package ch.hugdata.island.generator
 import ch.hugdata.island.graph.Point2D
 import ch.hugdata.island.svgwriter.Dimensions
 
+import scala.annotation.tailrec
 import scala.util.Random
 
 /**
-  * Created by Florian Hug <florian.hug@gmail.com> on 3/19/18.
+  * Generator of random points
   */
+
+class Generator(private val seed: Int) {
+
+  private val random = new Random(seed)
+
+  final def generatePoint(limits: Dimensions): Point2D = {
+    val xLocation = limits.minX + (random.nextDouble() * (limits.maxX - limits.minX))
+    val yLocation = limits.minY + (random.nextDouble() * (limits.maxY - limits.minY))
+    Point2D(xLocation, yLocation)
+  }
+
+  @tailrec
+  final def generatePoints(limits: Dimensions, num: Int, points: Seq[Point2D] = Seq()): Seq[Point2D] = {
+    if (num > 0) {
+      generatePoints(limits, num - 1, points :+ generatePoint(limits))
+    } else {
+      points
+    }
+  }
+}
+
 object Generator {
 
   def generatePoint()(implicit limits: Dimensions): Point2D = {
