@@ -32,6 +32,8 @@ class Generator(private val seed: Int) {
 
 object Generator {
 
+  def apply(seed: Int): Generator = new Generator(seed)
+
   def generatePoint()(implicit limits: Dimensions): Point2D = {
     val xLocation = limits.minX + (Random.nextDouble() * (limits.maxX - limits.minX))
     val yLocation = limits.minY + (Random.nextDouble() * (limits.maxY - limits.minY))
