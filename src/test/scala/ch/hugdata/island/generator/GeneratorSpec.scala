@@ -15,7 +15,7 @@ class GeneratorSpec extends FlatSpec {
     val generator: Generator = Generator(seed)
     val sample = Range(0,numberOfPoints)
       .map(_ => generator.generatePoint(limits))
-      .forall(point => limits.withinLimits(point.xLocation,point.yLocation))
+      .forall(point => limits.withinLimits(point.x,point.y))
     assert(sample === true)
   }
 
