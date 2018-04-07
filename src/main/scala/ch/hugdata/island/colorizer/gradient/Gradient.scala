@@ -1,4 +1,4 @@
-package ch.hugdata.island.svgwriter.gradient
+package ch.hugdata.island.colorizer.gradient
 
 import ch.hugdata.island.svgwriter.Color
 

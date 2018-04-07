@@ -1,16 +1,11 @@
 package ch.hugdata.island.generator
 
-import ch.hugdata.island.graph.Node
-import ch.hugdata.island.map.Coordinate
-
-import scala.util.Try
+import ch.hugdata.island.graph.{Node, Point3D}
 
 /**
-  * Transforms a
+  * Transforms a point from 2d into 3d space.
   */
 class IdentityCoordinateTransformer
   extends CoordinateTransformer {
-  override def generate(point: Node): Try[Coordinate] = {
-    Coordinate(point, 0)
-  }
+  override def generate(point: Node): Point3D = Point3D(point.x, point.y, 1)
 }

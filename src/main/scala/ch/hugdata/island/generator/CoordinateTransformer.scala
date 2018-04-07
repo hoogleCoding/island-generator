@@ -1,15 +1,12 @@
 package ch.hugdata.island.generator
 
-import ch.hugdata.island.graph.Node
-import ch.hugdata.island.map.Coordinate
-
-import scala.util.Try
+import ch.hugdata.island.graph.{Node, Point3D}
 
 /**
-  * Transformer for [[ch.hugdata.island.map.Coordinate]]s. Applies geographic mapping to add the elevation to a 2d point.
+  * Transformer for [[ch.hugdata.island.graph.Point3D]]s. Applies geographic mapping to add the elevation to a 2d point.
   */
 trait CoordinateTransformer {
 
-  def generate(point: Node): Try[Coordinate]
+  def generate(point: Node): Point3D
 
 }
