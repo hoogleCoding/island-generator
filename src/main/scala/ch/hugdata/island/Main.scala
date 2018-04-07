@@ -24,9 +24,10 @@ object Main extends IslandModule {
 
     val edges: EdgeGraph = EdgeGenerator.generateEdges(voronoiGraph)
     val nodeProperties = Seq(Property.size(3))
-    val svgColoredPoints = edges.nodes.map(coordinateTransformer.generate)
+    val svgColoredPoints = edges.nodes.par.map(coordinateTransformer.generate)
       .map(point => (point, point3DPropertyAssembler.assembleProperties(point, nodeProperties)))
       .map(configuredPoint => Point(configuredPoint._1, configuredPoint._2))
+      .seq
 
     val nodeGroup: Group = new Group(svgColoredPoints)
 

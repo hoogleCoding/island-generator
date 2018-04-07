@@ -3,7 +3,7 @@ package ch.hugdata.island
 import ch.hugdata.island.colorizer.gradient.{ColorFixPoint, ColorGradient}
 import ch.hugdata.island.colorizer.quantifier.{PointElevationQuantifier, Quantifier}
 import ch.hugdata.island.colorizer.{Colorizer, ConcreteColorizer}
-import ch.hugdata.island.generator.{CoordinateTransformer, Generator, IdentityCoordinateTransformer}
+import ch.hugdata.island.generator.{CoordinateTransformer, Generator, HalfDomeCoordinateTransformer}
 import ch.hugdata.island.graph.{Point3D, VoronoiCalculator}
 import ch.hugdata.island.svgwriter.{Color, Dimensions, PropertyAssembler, SvgWriter}
 import com.softwaremill.macwire._
@@ -27,7 +27,7 @@ trait IslandModule {
 
   lazy val svgWriter: SvgWriter = wire[SvgWriter]
 
-  lazy val coordinateTransformer: CoordinateTransformer = wire[IdentityCoordinateTransformer]
+  lazy val coordinateTransformer: CoordinateTransformer = wire[HalfDomeCoordinateTransformer]
 
   lazy val voronoiCalculator: VoronoiCalculator = wire[VoronoiCalculator]
 
