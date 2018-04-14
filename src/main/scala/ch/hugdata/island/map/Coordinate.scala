@@ -1,6 +1,6 @@
 package ch.hugdata.island.map
 
-import ch.hugdata.island.geography.Has2DLocation
+import ch.hugdata.island.graph.Has2DLocation
 
 import scala.util.{Failure, Success, Try}
 

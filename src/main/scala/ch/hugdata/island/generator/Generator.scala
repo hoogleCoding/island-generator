@@ -1,6 +1,6 @@
 package ch.hugdata.island.generator
 
-import ch.hugdata.island.graph.Point2D
+import ch.hugdata.island.graph.twodee.Point2D
 import ch.hugdata.island.svgwriter.Dimensions
 
 import scala.annotation.tailrec

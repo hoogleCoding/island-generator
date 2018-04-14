@@ -1,6 +1,6 @@
 package ch.hugdata.island.svgwriter
 
-import ch.hugdata.island.graph.{Point2D, Polygon2D}
+import ch.hugdata.island.graph.twodee.{Point2D, Polygon2D}
 import org.scalatest.FlatSpec
 
 /**

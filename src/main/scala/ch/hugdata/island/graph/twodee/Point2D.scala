@@ -1,6 +1,6 @@
-package ch.hugdata.island.graph
+package ch.hugdata.island.graph.twodee
 
-import ch.hugdata.island.geography.Has2DLocation
+import ch.hugdata.island.graph.Has2DLocation
 
 /**
   * Type for 2D-Points

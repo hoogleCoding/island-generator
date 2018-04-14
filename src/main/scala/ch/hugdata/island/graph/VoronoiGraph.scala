@@ -1,6 +1,6 @@
 package ch.hugdata.island.graph
 
-import ch.hugdata.island.geography.Has2DLocation
+import ch.hugdata.island.graph.twodee.Polygon2D
 
 /**
   * Type for the creation of voronoi diagrams

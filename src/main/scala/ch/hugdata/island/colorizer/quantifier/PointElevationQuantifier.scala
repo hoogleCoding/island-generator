@@ -1,7 +1,7 @@
 package ch.hugdata.island.colorizer.quantifier
 
 import ch.hugdata.island.MaxAltitude
-import ch.hugdata.island.graph.Point3D
+import ch.hugdata.island.graph.threedee.Point3D
 import com.softwaremill.tagging.@@
 
 /**

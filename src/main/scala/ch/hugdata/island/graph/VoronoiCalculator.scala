@@ -1,6 +1,6 @@
 package ch.hugdata.island.graph
 
-import ch.hugdata.island.geography.Has2DLocation
+import ch.hugdata.island.graph.twodee.{Point2D, Polygon2D}
 import ch.hugdata.island.svgwriter.Dimensions
 import kn.uni.voronoitreemap.datastructure.OpenList
 import kn.uni.voronoitreemap.diagram.PowerDiagram
