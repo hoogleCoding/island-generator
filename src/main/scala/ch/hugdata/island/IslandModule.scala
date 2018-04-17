@@ -6,7 +6,8 @@ import ch.hugdata.island.colorizer.{Colorizer, ConcreteColorizer}
 import ch.hugdata.island.generator.{CoordinateTransformer, Generator, HalfDomeCoordinateTransformer}
 import ch.hugdata.island.graph.VoronoiCalculator
 import ch.hugdata.island.graph.threedee.{Point3D, Polygon3D}
-import ch.hugdata.island.svgwriter.{Color, Dimensions, PropertyAssembler, SvgWriter}
+import ch.hugdata.island.map.MapDrawer
+import ch.hugdata.island.svgwriter._
 import com.softwaremill.macwire._
 import com.softwaremill.tagging._
 
@@ -44,17 +45,28 @@ trait IslandModule {
 
   lazy val polygon3DPropertyAssembler: PropertyAssembler[Polygon3D] = wire[PropertyAssembler[Polygon3D]]
 
+  lazy val mapDrawer:MapDrawer = wire[MapDrawer]
+
   val gradient: ColorGradient = Try {
     Seq(ColorFixPoint(0, Color(1, 38, 119)),
-      ColorFixPoint(0.09, Color(0,91,197)),
+      ColorFixPoint(0.09, Color(0, 91, 197)),
       ColorFixPoint(0.1, Color(215, 147, 48)),
-      ColorFixPoint(0.2, Color(75,110,40)),
-      ColorFixPoint(0.8, Color(66,165,80)),
-      ColorFixPoint(1.0, Color(142,126,100)))
+      ColorFixPoint(0.2, Color(75, 110, 40)),
+      ColorFixPoint(0.8, Color(66, 165, 80)),
+      ColorFixPoint(1.0, Color(142, 126, 100)))
       .map(_.get)
   }.map(ColorGradient)
     .get
 
+  val nodeProperties: Seq[Property] @@ NodeProperties = Seq(Property.size(3)).taggedWith[NodeProperties]
+
+  val polygonProperties: Seq[Property] @@ PolygonProperties = Seq(Property.strokeWith(0)).taggedWith[PolygonProperties]
+
+
 }
 
 trait MaxAltitude
+
+trait NodeProperties
+
+trait PolygonProperties
