@@ -1,8 +1,8 @@
 package ch.hugdata.island.generator
 
-import ch.hugdata.island.graph.Has2DLocation
 import ch.hugdata.island.graph.threedee._
-import ch.hugdata.island.graph.twodee.{Edge2D, EdgeGraph2D, Point2D, Polygon2D}
+import ch.hugdata.island.graph.twodee.{Edge2D, EdgeGraph2D}
+import ch.hugdata.island.graph.{Has2DLocation, Is2DPolygon}
 
 /**
   * Transformer for [[Point3D]]s. Applies geographic mapping to add the elevation to a 2d point.
@@ -16,8 +16,8 @@ trait CoordinateTransformer {
     nodeB <- convertedPoints.get(edge2d.nodeB.location)
   } yield Edge3D(nodeA, nodeB)
 
-  protected def toPolygon3D(polygon: Polygon2D, convertedPoints: Map[Has2DLocation, Node3D]): Polygon3D = {
-    val points = polygon.points
+  protected def toPolygon3D(polygon: Is2DPolygon, convertedPoints: Map[Has2DLocation, Node3D]): Polygon3D = {
+    val points = polygon.getPoints
       .flatMap(point => convertedPoints.get(point))
       .map(_.location)
     Polygon3D(points)

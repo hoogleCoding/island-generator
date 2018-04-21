@@ -16,10 +16,12 @@ object Main extends IslandModule {
 
     val seedPoints: Seq[Point2D] = generator.generatePoints(dimensions, 2000)
 
-    val voronoiGraph = voronoiCalculator.iterateVoronoi(seedPoints, 4)
+    val voronoiGraph: VoronoiGraph = voronoiCalculator.iterateVoronoi(seedPoints, 4)
 
-    val edges: EdgeGraph2D = EdgeGenerator.generateEdges(voronoiGraph)
+    val edges: EdgeGraph2D = edgeGenerator.generateEdges(voronoiGraph)
     val edgeGraph3D = coordinateTransformer.generate(edges)
+
+    println(s"Total length of all edges: ${edges.edges.map(_.length).sum}")
 
     val group = mapDrawer.drawMap(edgeGraph3D)
 

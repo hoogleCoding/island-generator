@@ -1,0 +1,7 @@
+svg {
+    background-color: white;
+}
+
+polygon {
+    filter: blur(5px);
+}

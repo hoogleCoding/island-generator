@@ -4,8 +4,9 @@ import ch.hugdata.island.colorizer.gradient.{ColorFixPoint, ColorGradient}
 import ch.hugdata.island.colorizer.quantifier.{PointElevationQuantifier, PolygonElevationQuantifier, Quantifier}
 import ch.hugdata.island.colorizer.{Colorizer, ConcreteColorizer}
 import ch.hugdata.island.generator.{CoordinateTransformer, Generator, HalfDomeCoordinateTransformer}
-import ch.hugdata.island.graph.VoronoiCalculator
 import ch.hugdata.island.graph.threedee.{Point3D, Polygon3D}
+import ch.hugdata.island.graph.triangulation.{MostAcuteCornerTriangulation, Triangulation}
+import ch.hugdata.island.graph.{EdgeGenerator, VoronoiCalculator}
 import ch.hugdata.island.map.MapDrawer
 import ch.hugdata.island.svgwriter._
 import com.softwaremill.macwire._
@@ -33,6 +34,10 @@ trait IslandModule {
 
   lazy val voronoiCalculator: VoronoiCalculator = wire[VoronoiCalculator]
 
+  lazy val edgeGenerator: EdgeGenerator = wire[EdgeGenerator]
+
+  lazy val triangulation: Triangulation = wire[MostAcuteCornerTriangulation]
+
   lazy val point3DQuantifier: Quantifier[Point3D] = wire[PointElevationQuantifier]
 
   lazy val point3DColorizer: Colorizer[Point3D] = wire[ConcreteColorizer[Point3D]]
@@ -45,7 +50,7 @@ trait IslandModule {
 
   lazy val polygon3DPropertyAssembler: PropertyAssembler[Polygon3D] = wire[PropertyAssembler[Polygon3D]]
 
-  lazy val mapDrawer:MapDrawer = wire[MapDrawer]
+  lazy val mapDrawer: MapDrawer = wire[MapDrawer]
 
   val gradient: ColorGradient = Try {
     Seq(ColorFixPoint(0, Color(1, 38, 119)),
